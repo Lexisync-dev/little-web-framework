@@ -1,5 +1,5 @@
 {
-  "name": "little-web-framework",
+  "name": "@lexisync/little-web-framework",
   "version": "1.0.1",
   "description": "A lightweight experimental web framework built in TypeScript using composition.",
   "main": "dist/index.js",
@@ -15,10 +15,17 @@
     "typescript",
     "web"
   ],
-  "author": "",
+  "author": "lexisync",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.11.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lexisync/little-web-framework.git"
   },
   "devDependencies": {
     "typescript": "^5.0.0"

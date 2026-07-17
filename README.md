@@ -1,6 +1,6 @@
 # Little Web Framework
 
-A lightweight, experimental frontend web framework built from scratch with TypeScript. 
+A lightweight, experimental frontend web framework built from scratch with TypeScript.
 
 ## Overview
 
@@ -21,7 +21,7 @@ This framework operates by combining a `Model` (which handles data, events, and 
 Because the framework uses composition, you build your custom data entities by injecting the `Attributes`, `Eeventing`, and `Sync` modules into the base `Model`.
 
 ```typescript
-import { Model, Attributes, Eeventing, Sync } from 'little-web-framework';
+import { Model, Attributes, Eeventing, Sync } from "little-web-framework";
 
 export interface UserProps {
   id?: string;
@@ -29,7 +29,7 @@ export interface UserProps {
   age?: number;
 }
 
-const rootUrl = 'http://localhost:3000/users';
+const rootUrl = "http://localhost:3000/users";
 
 export class User extends Model<UserProps> {
   // A static factory method makes initialization cleaner
@@ -37,7 +37,7 @@ export class User extends Model<UserProps> {
     return new User(
       new Attributes<UserProps>(attrs),
       new Eeventing(),
-      new Sync<UserProps>(rootUrl)
+      new Sync<UserProps>(rootUrl),
     );
   }
 }
@@ -48,15 +48,15 @@ export class User extends Model<UserProps> {
 To create a UI component, extend the `View` class. You must define an HTML `template` and you can map DOM events using `eventsMap`.
 
 ```typescript
-import { View } from 'little-web-framework';
-import { User, UserProps } from './User';
+import { View } from "little-web-framework";
+import { User, UserProps } from "./User";
 
 export class UserForm extends View<User, UserProps> {
   // Map standard DOM events to methods using 'eventName:selector' syntax
   eventsMap(): { [key: string]: () => void } {
     return {
-      'click:.set-age': this.onSetAgeClick,
-      'click:.set-name': this.onSetNameClick
+      "click:.set-age": this.onSetAgeClick,
+      "click:.set-name": this.onSetNameClick,
     };
   }
 
@@ -66,7 +66,7 @@ export class UserForm extends View<User, UserProps> {
   };
 
   onSetNameClick = (): void => {
-    const input = this.parent.querySelector('input');
+    const input = this.parent.querySelector("input");
     if (input) {
       this.model.set({ name: input.value });
     }
@@ -76,8 +76,8 @@ export class UserForm extends View<User, UserProps> {
     return `
       <div>
         <h1>User Form</h1>
-        <div>User name: ${this.model.get('name')}</div>
-        <div>User age: ${this.model.get('age')}</div>
+        <div>User name: ${this.model.get("name")}</div>
+        <div>User age: ${this.model.get("age")}</div>
         <input placeholder="Enter new name" />
         <button class="set-name">Change Name</button>
         <button class="set-age">Set Random Age</button>
@@ -92,20 +92,20 @@ export class UserForm extends View<User, UserProps> {
 Once your Model and View are defined, you bind them together. The View automatically re-renders whenever the Model's data changes.
 
 ```typescript
-import { User } from './User';
-import { UserForm } from './UserForm';
+import { User } from "./User";
+import { UserForm } from "./UserForm";
 
 // 1. Initialize the model
-const user = User.buildUser({ name: 'Alice', age: 25 });
+const user = User.buildUser({ name: "Alice", age: 25 });
 
 // 2. Find the root DOM element
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 
 if (root) {
   // 3. Initialize and render the View
   const userForm = new UserForm(root, user);
   userForm.render();
 } else {
-  throw new Error('Root element not found');
+  throw new Error("Root element not found");
 }
 ```
