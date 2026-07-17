@@ -24,8 +24,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lexisync/little-web-framework.git"
+    "url": "https://github.com/Lexisync-dev/little-web-framework"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
